@@ -2293,7 +2293,7 @@ _renoir_dx11_command_execute(IRenoir* self, Renoir_Command* command)
 			}
 			
 			// Unbind render targets
-			ID3D11RenderTargetView* render_target_views[4] = { nullptr, nullptr, nullptr, nullptr };
+			ID3D11RenderTargetView* render_target_views[RENOIR_CONSTANT_COLOR_ATTACHMENT_SIZE] = { nullptr, nullptr, nullptr, nullptr };
 			self->context->OMSetRenderTargets(RENOIR_CONSTANT_COLOR_ATTACHMENT_SIZE, render_target_views, nullptr);
 		}
 		else if (h->kind == RENOIR_HANDLE_KIND_COMPUTE_PASS)
