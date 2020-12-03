@@ -2822,6 +2822,9 @@ _renoir_dx11_command_execute(IRenoir* self, Renoir_Command* command)
 				assert(_renoir_pixelformat_is_depth(h->texture.pixel_format) == false && "you can't write to depth buffer from compute shader");
 				if (command->texture_bind.gpu_access == RENOIR_ACCESS_READ)
 				{
+					// Unbind render targets so that we can assign the texture as a RSV in the compute shader
+					ID3D11RenderTargetView* render_target_views[4] = { nullptr, nullptr, nullptr, nullptr };
+					self->context->OMSetRenderTargets(RENOIR_CONSTANT_COLOR_ATTACHMENT_SIZE, render_target_views, nullptr);
 					self->context->CSSetShaderResources(command->texture_bind.slot, 1, &h->texture.shader_view);
 				}
 				else if (command->texture_bind.gpu_access == RENOIR_ACCESS_WRITE ||
