@@ -2400,23 +2400,8 @@ _renoir_dx11_command_execute(IRenoir* self, Renoir_Command* command)
 						}
 						else if (hres->texture.texture3d)
 						{
-							D3D11_BOX src_box{};
-							src_box.left = 0;
-							src_box.right = hres->texture.desc.size.width;
-							src_box.top = 0;
-							src_box.bottom = hres->texture.desc.size.height;
-							src_box.front = 0;
-							src_box.back = hres->texture.desc.size.depth;
-							self->context->CopySubresourceRegion(
-								h->texture.texture3d_staging,
-								0,
-								0,
-								0,
-								0,
-								h->texture.texture3d,
-								0,
-								&src_box
-							);
+							self->context->CopyResource(hres->texture.texture3d_staging,
+								hres->texture.texture3d);
 						}
 					}
 				}
