@@ -2740,7 +2740,7 @@ _renoir_dx11_command_execute(IRenoir* self, Renoir_Command* command)
 				{
 					::memcpy(
 						write_ptr,
-						read_ptr + desc.x * dx_pixel_size,
+						read_2d_ptr + desc.x * dx_pixel_size,
 						desc.width * dx_pixel_size
 					);
 					read_2d_ptr += mapped_resource.RowPitch;
